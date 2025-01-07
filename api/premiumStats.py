@@ -1,14 +1,25 @@
 import os
+import logging
 from django.conf import settings
 from django.http import JsonResponse
 from csvmanager.fileHandler import read_file
 from api.utils import percentage
 
-file_path = os.path.join(settings.BASE_DIR, 'csvmanager', 'files', 'Spotify_data_user.xlsx')
-datas = read_file(file_path)
-total_users = len(datas)
+logger = logging.getLogger(__name__)
+
+try:
+    file_path = os.path.join(settings.BASE_DIR, 'csvmanager', 'files', 'Spotify_data_user.xlsx')
+    datas = read_file(file_path)
+    total_users = len(datas)
+except Exception as e:
+    logger.error(f"Error reading data file: {e}")
+    datas = []
+    total_users = 0
 
 def counts_and_percentage(counts, local_total):
+    if local_total == 0:
+        return {}
+    
     return {
         item: {
             "count": count,
@@ -119,4 +130,5 @@ def get_premium_stats(request):
         }
         return JsonResponse(response_data, safe=False)
     except ValueError as e:
+        logger.exception("Une erreur est survenue pendant la récupération des statistiques liées aux abonnements premium")
         return JsonResponse({'error': str(e)}, status=400)

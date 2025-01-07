@@ -8,6 +8,12 @@ def get_filtered_data(request):
 
     filters = {key: value for key, value in request.GET.items()}
 
+    filter = {
+        "popularity": 'top10',
+        "year": '<2021',
+        "track_name": 'truc'
+    }
+
     try:
         data = read_file(file_path, filters)
         return JsonResponse(data, safe=False)

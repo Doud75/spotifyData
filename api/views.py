@@ -11,8 +11,7 @@ def get_filtered_data(request):
     filter = {
         "popularity": 'top10',
         "year": '<2021',
-        "track_name": 'truc',
-        "yo": 'yo'
+        "track_name": 'truc'
     }
 
     try:

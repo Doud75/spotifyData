@@ -10,7 +10,11 @@ def get_top_stats():
         raise ValueError("Les colonnes nécessaires sont manquantes dans le fichier CSV.")
     
     # Top 10 chansons
-    top_10_songs = df.nlargest(10, 'popularity')[['track_name', 'popularity']].to_dict(orient='records')
+    top_10_songs = df.nlargest(10, 'popularity')[[
+        'track_name', 'artist_name', 'album_name', 'popularity',
+        'year', 'duration_ms',
+        'artwork_url', 'track_url'
+    ]].to_dict(orient='records')
     
     # Top 10 artistes
     artist_popularity = df.groupby('artist_name')['popularity'].sum().reset_index()

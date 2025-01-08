@@ -19,3 +19,7 @@ def get_filtered_data(request):
         return JsonResponse(data, safe=False)
     except ValueError as e:
         return JsonResponse({'error': str(e)}, status=400)
+
+
+def get_stats_by_language_api(request):
+    return None

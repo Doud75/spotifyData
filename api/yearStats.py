@@ -3,7 +3,7 @@ from django.conf import settings
 import os
 import pandas as pd
 
-def year_stats(request):
+def get_year_stats(request):
     # Chemin vers le fichier CSV
     file_path = os.path.join(settings.BASE_DIR, 'csvmanager', 'files', 'spotify_tracks.csv')
 
@@ -11,7 +11,7 @@ def year_stats(request):
         # Charger les données
         df = pd.read_csv(file_path)
         
-        # Nettoyer et convertir la colonne 'year'
+        # Nettoyer la colonne 'year'
         df['year'] = pd.to_numeric(df['year'], errors='coerce')
         df = df.dropna(subset=['year'])
         df['year'] = df['year'].astype(int)

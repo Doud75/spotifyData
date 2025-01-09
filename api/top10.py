@@ -26,9 +26,15 @@ def get_top_stats():
 
     top_10_artists = top_10_artists.to_dict(orient='records')
 
+    top_10_danceable_songs = df.nlargest(10, 'danceability')[[
+        'track_name', 'artist_name', 'album_name', 'danceability',
+        'year', 'duration_ms', 'artwork_url', 'track_url'
+    ]].to_dict(orient='records')
+
     return {
         "top_10_songs": top_10_songs,
-        "top_10_artists": top_10_artists
+        "top_10_artists": top_10_artists,
+        "top_10_danceable_songs": top_10_danceable_songs
     }
 
 

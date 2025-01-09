@@ -21,18 +21,25 @@ def get_year_summary_stats(request):
     try:
         df = load_and_prepare_df()
         total_tracks = len(df)
+        total_unique_artists = df['artist_name'].nunique()
+
         year2024_df = df[df['year'] == 2024]
         year2024_count = len(year2024_df)
+
         percentage_2024 = (year2024_count / total_tracks * 100) if total_tracks > 0 else 0
 
         data = {
             "total_tracks": total_tracks,
             "year2024_count": year2024_count,
-            "year2024_percentage": percentage_2024
+            "year2024_percentage": percentage_2024,
+            "total_unique_artists": total_unique_artists,
+
         }
         return JsonResponse(data)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
 
 def get_yearly_distribution_stats(request):
     """Route pour obtenir la répartition des morceaux par année avec pourcentages."""

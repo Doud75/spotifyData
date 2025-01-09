@@ -37,7 +37,7 @@ def _get_plan_distribution(data):
     plan_count = {}
 
     for record in data:
-        plan = record.get('spotify_subscription_plan', 'Unknown')  # Default to 'Unknown' if the key is missing
+        plan = record.get('spotify_subscription_plan', 'Unknown') 
         plan_count[plan] = plan_count.get(plan, 0) + 1
 
     return counts_and_percentage(plan_count, total_users)

@@ -1,10 +1,12 @@
 asgiref==3.8.1
 Django==5.1.4
+django-cors-headers==4.6.0
+et_xmlfile==2.0.0
 numpy==2.2.1
+openpyxl==3.1.4
 pandas==2.2.3
 python-dateutil==2.9.0.post0
 pytz==2024.2
 six==1.17.0
 sqlparse==0.5.3
 tzdata==2024.2
-openpyxl==3.1.4

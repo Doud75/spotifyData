@@ -38,7 +38,8 @@ def _get_plan_distribution(data):
 
     for record in data:
         plan = record.get('spotify_subscription_plan', 'Unknown') 
-        plan_count[plan] = plan_count.get(plan, 0) + 1
+        first_word = plan.split()[0]
+        plan_count[first_word] = plan_count.get(first_word, 0) + 1
 
     return counts_and_percentage(plan_count, total_users)
 
@@ -49,7 +50,7 @@ def _plan_vs_usage_period(data):
     results = {}
     for record in data:
         period = record.get('spotify_usage_period', 'Unknown')
-        plan = record.get('spotify_subscription_plan', 'Unknown')
+        plan = record.get('spotify_subscription_plan', 'Unknown').split()[0]
         if period not in results:
             results[period] = {}
         results[period][plan] = results[period].get(plan, 0) + 1
@@ -69,7 +70,7 @@ def _plan_vs_age(data):
     results = {}
     for record in data:
         age_group = record.get('Age', 'Unknown')
-        plan = record.get('spotify_subscription_plan', 'Unknown')
+        plan = record.get('spotify_subscription_plan', 'Unknown').split()[0]
         if age_group not in results:
             results[age_group] = {}
         results[age_group][plan] = results[age_group].get(plan, 0) + 1
@@ -87,7 +88,7 @@ def _plan_vs_satisfaction(data):
     results = {}
     for record in data:
         satisfaction = record.get('pod_variety_satisfaction', 'Unknown')
-        plan = record.get('spotify_subscription_plan', 'Unknown')
+        plan = record.get('spotify_subscription_plan', 'Unknown').split()[0]
         if satisfaction not in results:
             results[satisfaction] = {}
         results[satisfaction][plan] = results[satisfaction].get(plan, 0) + 1
@@ -106,7 +107,7 @@ def _plan_vs_content_type(data):
     results = {}
     for record in data:
         content_type = record.get('preferred_listening_content', 'Unknown')
-        plan = record.get('spotify_subscription_plan', 'Unknown')
+        plan = record.get('spotify_subscription_plan', 'Unknown').split()[0]
         if content_type not in results:
             results[content_type] = {}
         results[content_type][plan] = results[content_type].get(plan, 0) + 1

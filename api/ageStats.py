@@ -38,7 +38,7 @@ def get_age_stats(request):
         all_data = read_file(file_path)
         total_users_global = len(all_data)
 
-        age_groups = ["12-20", "20-35", "35-60", "60+"]
+        age_groups = ["12-20", "20-35", "35-60"]
         age_stats = {}
 
         for age_group in age_groups:
